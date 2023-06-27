@@ -6,7 +6,7 @@ const ButtonComponent = styled.button<ButtonProps>`
     padding: 0.5em 3em;
     border: none;
     border-radius: 10px;
-    font-size: 24px;
+    font-size: ${({ fontSize }) => fontSize || "24px"};
     font-weight: 600;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
@@ -23,6 +23,7 @@ const ButtonComponent = styled.button<ButtonProps>`
 interface ButtonProps {
     children: string;
     bgColor?: string;
+    fontSize?: string;
 }
 
 export default function Button(props: ButtonProps) {

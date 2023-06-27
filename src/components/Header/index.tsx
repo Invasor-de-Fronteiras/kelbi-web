@@ -18,6 +18,45 @@ const HeaderContainer = styled.header`
         display: flex;
         gap: 3em;
     }
+
+    .hoverBox {
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hoverBox:hover {
+        cursor: pointer;
+        transition: 50ms;
+        transform: scale(1.1);
+    }
+
+    li:active .hoverBox {
+        color: #e3dede;
+    }
+
+    .mediumButton {
+        display: none;
+    }
+
+    @media (max-width: 1200px) {
+        padding: 0 1.5em;
+        font-size: 20px;
+
+        .largeButton {
+            display: none;
+        }
+
+        .mediumButton {
+            display: block;
+        }
+    }
+
+    @media (max-width: 950px) {
+        ul {
+            gap: 1.5em;
+        }
+    }
 `
 
 export default function Header() {
@@ -26,14 +65,19 @@ export default function Header() {
             <img src="/arca-colorful-logo.svg"></img>
             <nav>
                 <ul>
-                    <li>news</li>
-                    <li>rankings</li>
-                    <li>download</li>
-                    <li>faq</li>
-                    <li>team</li>
+                    <li><div className="hoverBox">news</div></li>
+                    <li><div className="hoverBox">rankings</div></li>
+                    <li><div className="hoverBox">download</div></li>
+                    <li><div className="hoverBox">faq</div></li>
+                    <li><div className="hoverBox">team</div></li>
                 </ul>
             </nav>
-            <Button>Login</Button>
+            <div className="largeButton">
+                <Button>Login</Button>
+            </div>
+            <div className="mediumButton">
+                <Button fontSize="20px">Login</Button>
+            </div>
         </HeaderContainer>
     )
 }

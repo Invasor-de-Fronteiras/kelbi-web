@@ -40,13 +40,13 @@ const Container = styled.div`
 
     @media (max-width: 760px) {
         .introText {
-            font-size: 20px;
+            font-size: 18px;
         }
     }
 
     @media (max-width: 500px) {
         .introText {
-            font-size: 18px
+            font-size: 16px
         }
     }
 `

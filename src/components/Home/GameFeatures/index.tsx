@@ -18,6 +18,12 @@ const Container = styled.div`
         text-align: left;
     }
 
+    @media (max-width: 1525px) {
+        h2 {
+            font-size: 30px;
+        }
+    }
+
     @media (max-width: 1280px) {
         h2 {
             font-size: 32px;

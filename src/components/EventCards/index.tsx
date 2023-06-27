@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.section`
     width: 100%;
-    padding-bottom: 5em;
+    padding: 3em 0;
 `
     
 const TitleContainer = styled.div`
@@ -23,12 +23,20 @@ const TitleContainer = styled.div`
         margin: 0.2em 0;
         padding: 0;
     }
+
+    @media (max-width: 560px) {
+        text-align: center;
+    }
 `
 
 const CardContainer = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1em;
+
+    @media (max-width: 560px) {
+
+    }
 `
 
 const Card = styled.div`
@@ -57,9 +65,42 @@ const Card = styled.div`
         color: var(--gray);
     }
 
+    hr {
+        display: none;
+    }
+
     @media (max-width: 760px) {
         h3 {
             font-size: 16px;
+        }
+    }
+
+    @media (max-width: 560px) {
+        flex-direction: column;
+        gap: 0.5em;
+
+        h3 {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .postDate {
+            display: none;
+        }
+
+        p {
+            display: none;
+        }
+
+        hr {
+            width: 90%;
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid var(--gray);
+            margin: 0.2em 0;
+            padding: 0;
+            align-self: center;
         }
     }
 `
@@ -70,6 +111,10 @@ const ImageExample = styled.div`
     height: 124px;
     width: 245px;
     flex-shrink: 0;
+
+    @media (max-width: 560px) {
+        align-self: center;
+    }
 `
 
 export default function EventCards() {
@@ -112,9 +157,10 @@ export default function EventCards() {
                         <ImageExample />
                         <div className="text">
                             <h3>{item.title}</h3>
-                            <h3>{`- ${item.postDay}th ${item.postMonth} ${item.postYear}`}</h3>
+                            <h3 className="postDate">{`- ${item.postDay}th ${item.postMonth} ${item.postYear}`}</h3>
                             <p>{`By ${item.author}, ${item.postDay} days ago`}</p>
                         </div>
+                        <hr />
                     </Card>
                 ))}
             </CardContainer>
