@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin-top: 2em;
 
     h2 {
         font-size: 36px;
@@ -12,13 +15,38 @@ const Container = styled.div`
     p {
         font-size: 12px;
         color: var(--gray);
+        text-align: left;
     }
 `
 
 const Card = styled.section`
     display: flex;
     align-items: center;
-    
+    justify-content: space-between;
+    margin: 0;
+    height: 14em;
+
+    img {
+        max-height: 100%;
+    }
+
+    & > div:first-child {
+        flex-basis: 50%;
+        margin: 0 1em 0 0;
+    }
+
+    & > div:last-child {
+        flex-basis: 50%;
+        flex-grow: 1;
+    }
+
+    &.reverse-card {
+        flex-direction: row-reverse;
+    }
+
+    &.reverse-card > div:first-child {
+        margin: 0 0 0 1em;
+    }
 `
 
 export default function GameFeatures() {
@@ -42,8 +70,8 @@ export default function GameFeatures() {
 
     return (
         <Container>
-            {features.map((item) => (
-                <Card key={item.title}>
+            {features.map((item, index) => (
+                <Card key={item.title} className={index % 2 !== 0 ? 'reverse-card' : ''}>
                     <div>
                         <img src={item.img} alt={item.title}/>
                     </div>

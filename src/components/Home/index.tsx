@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Button from "../Button";
 import ServerStatus from "../ServerStatus";
 import GameFeatures from "./GameFeatures";
+import EventCards from "../EventCards";
 
 const Main = styled.main`
     background-color: var(--black-bg);
@@ -39,6 +40,7 @@ export default function Home() {
                 <Button bgColor="var(--orange)">Baixar agora</Button>
                 <ServerStatus />
                 <GameFeatures />
+                <EventCards />
             </Container>
         </Main>
     )
