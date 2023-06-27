@@ -56,6 +56,12 @@ const Card = styled.div`
         font-weight: 500;
         color: var(--gray);
     }
+
+    @media (max-width: 760px) {
+        h3 {
+            font-size: 16px;
+        }
+    }
 `
 
 const ImageExample = styled.div`

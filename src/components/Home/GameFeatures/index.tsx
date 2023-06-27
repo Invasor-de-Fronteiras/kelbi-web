@@ -17,6 +17,18 @@ const Container = styled.div`
         color: var(--gray);
         text-align: left;
     }
+
+    @media (max-width: 1280px) {
+        h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+
+        p {
+            margin: auto;
+        }
+    }
 `
 
 const Card = styled.section`
@@ -25,27 +37,40 @@ const Card = styled.section`
     justify-content: space-between;
     margin: 0;
     height: 14em;
-
-    img {
-        max-height: 100%;
+    
+    @media (min-width: 1281px) {
+        img {
+            max-height: 100%;
+        }
+    
+        & > div:first-child {
+            flex-basis: 50%;
+            margin: 0 1em 0 0;
+        }
+    
+        & > div:last-child {
+            flex-basis: 50%;
+            flex-grow: 1;
+        }
+    
+        &.reverse-card {
+            flex-direction: row-reverse;
+        }
+    
+        &.reverse-card > div:first-child {
+            margin: 0 0 0 1em;
+            text-align: end;
+        }
     }
+    
+    @media (max-width: 1280px) {
+        flex-direction: column;
+        height: auto;
 
-    & > div:first-child {
-        flex-basis: 50%;
-        margin: 0 1em 0 0;
-    }
-
-    & > div:last-child {
-        flex-basis: 50%;
-        flex-grow: 1;
-    }
-
-    &.reverse-card {
-        flex-direction: row-reverse;
-    }
-
-    &.reverse-card > div:first-child {
-        margin: 0 0 0 1em;
+        img {
+            width: 100%;
+            margin-bottom: 2em;
+        }
     }
 `
 

@@ -3,6 +3,18 @@ import styled from "styled-components";
 const Container = styled.div`
     display: flex;
 
+    h2 {
+        font-size: 32px;
+        text-align: center;
+    }
+
+    p {
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+    }
+
     div:first-child {
         border-radius: 1em 0 0 1em;
     }
@@ -10,18 +22,29 @@ const Container = styled.div`
     div:last-child {
         border-radius: 0 1em 1em 0;
     }
-`
 
-const Title = styled.h2`
-    font-size: 32px;
-    text-align: center;
-`
+    @media (max-width: 660px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
 
-const Paragraph = styled.p`
-    font-size: 12px;
-    width: 100%;
-    text-align: center;
-    white-space: nowrap;
+
+        div:nth-child(1) {
+            border-radius: 1em 0 0 0;
+        }
+
+        div:nth-child(2) {
+            border-radius: 0 1em 0 0;
+        }
+
+        div:nth-child(3) {
+            border-radius: 0 0 0 1em;
+        }
+
+        div:nth-child(4) {
+            border-radius: 0 0 1em 0;
+        }
+
+    }
 `
 
 const Box = styled.div`
@@ -31,6 +54,10 @@ const Box = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0 0.1em;
+
+    @media (max-width: 660px) {
+        margin: 0.1em;
+    }
 `
 
 export default function ServerStatus() {
@@ -62,8 +89,8 @@ export default function ServerStatus() {
             {status.map((item) => (
                 <Box key={item.name}>
                     <img src={item.img} alt={item.name} height={"32px"}/>
-                    <Title>{item.qnt}</Title>
-                    <Paragraph>{item.name}</Paragraph>
+                    <h2>{item.qnt}</h2>
+                    <p>{item.name}</p>
                 </Box>
             ))}
         </Container>

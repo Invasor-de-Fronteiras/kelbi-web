@@ -25,9 +25,29 @@ const Container = styled.div`
     gap: 3em;
     margin-top: 3em;
 
-    p {
+    .introText {
         width: 60%;
         text-align: justify;
+    }
+
+    @media (max-width: 1280px) {
+        width: 90vw;
+
+        .introText {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .introText {
+            font-size: 20px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .introText {
+            font-size: 18px
+        }
     }
 `
 
@@ -36,7 +56,7 @@ export default function Home() {
         <Main>
             <Container>
                 <img src="/arca-colorful-logo.svg" alt="arca logo" width={"72px"}></img>
-                <p>Esteja entre os poucos jogadores que tiveram a chance de jogar <span>Monster Hunter Frontier</span> e agora junte-se a nós em nosso servidor. Aqui você encontrará uma comunidade unida e disposta a enfrentar qualquer desafio que o jogo possa oferecer</p>
+                <p className="introText">Esteja entre os poucos jogadores que tiveram a chance de jogar <span>Monster Hunter Frontier</span> e agora junte-se a nós em nosso servidor. Aqui você encontrará uma comunidade unida e disposta a enfrentar qualquer desafio que o jogo possa oferecer</p>
                 <Button bgColor="var(--orange)">Baixar agora</Button>
                 <ServerStatus />
                 <GameFeatures />

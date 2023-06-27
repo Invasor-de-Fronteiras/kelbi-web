@@ -13,7 +13,7 @@ const Container = styled.footer`
     }
 
     p {
-        width: 12vw;
+        width: 50%;
         text-align: justify;
     }
 
@@ -29,11 +29,37 @@ const Container = styled.footer`
         color: white;
         padding-bottom: 0.5;
     }
+
+    @media (max-width: 760px) {
+        flex-direction: column;
+        padding: 3em 5%;
+
+        p {
+            width: 100%;
+        }
+
+        h2 {
+            margin-top: 2em;
+        }
+    }
 `
 
 const Navigation = styled.nav`
     display: flex;
     gap: 3em;
+    
+    @media (max-width: 760px) {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    @media (max-width: 285px) {
+        justify-content: center;
+
+        img {
+            display: none;
+        }
+    }
 `
 
 export default function Footer() {
@@ -55,7 +81,7 @@ export default function Footer() {
                         <li>Teams</li>
                     </ul>
                 </div>
-                <img src="/arca-colorful-logo.svg"></img>
+                <img src="/arca-colorful-logo.svg" width={"72px"}></img>
             </Navigation>
         </Container>
     )
