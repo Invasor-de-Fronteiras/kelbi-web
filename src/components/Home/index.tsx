@@ -1,8 +1,9 @@
-import styled from "styled-components";
-import Button from "../Button";
-import ServerStatus from "../ServerStatus";
-import GameFeatures from "./GameFeatures";
-import EventCards from "../EventCards";
+import React from 'react';
+import styled from 'styled-components';
+import Button from '../Button';
+import ServerStatus from '../ServerStatus';
+import GameFeatures from './GameFeatures';
+import EventCards from '../EventCards';
 
 const Main = styled.main`
     background-color: var(--black-bg);
@@ -15,7 +16,7 @@ const Main = styled.main`
     span {
         color: var(--orange);
     }
-`
+`;
 
 const Container = styled.div`
     display: flex;
@@ -49,19 +50,21 @@ const Container = styled.div`
             font-size: 16px
         }
     }
-`
+`;
 
 export default function Home() {
-    return (
-        <Main>
-            <Container>
-                <img src="/arca-colorful-logo.svg" alt="arca logo" width={"72px"}></img>
-                <p className="introText">Esteja entre os poucos jogadores que tiveram a chance de jogar <span>Monster Hunter Frontier</span> e agora junte-se a nós em nosso servidor. Aqui você encontrará uma comunidade unida e disposta a enfrentar qualquer desafio que o jogo possa oferecer</p>
-                <Button bgColor="var(--orange)">Baixar agora</Button>
-                <ServerStatus />
-                <GameFeatures />
-                <EventCards />
-            </Container>
-        </Main>
-    )
+	return (
+		<Main>
+			<Container>
+				<img src='/arca-colorful-logo.svg' alt='arca logo' width='72px' />
+				<p className='introText'>
+                    Esteja entre os poucos jogadores que tiveram a chance de jogar<span> Monster Hunter Frontier</span> e agora junte-se a nós em nosso servidor. Aqui você encontrará uma comunidade unida e disposta a enfrentar qualquer desafio que o jogo possa oferecer
+				</p>
+				<Button bgColor='var(--orange)'>Baixar agora</Button>
+				<ServerStatus />
+				<GameFeatures />
+				<EventCards />
+			</Container>
+		</Main>
+	);
 }

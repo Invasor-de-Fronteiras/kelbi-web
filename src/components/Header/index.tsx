@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import Button from "../Button";
+import React from 'react';
+import styled from 'styled-components';
+import Button from '../Button';
 
 const HeaderContainer = styled.header`
     padding: 0 3em;
@@ -57,27 +58,27 @@ const HeaderContainer = styled.header`
             gap: 1.5em;
         }
     }
-`
+`;
 
 export default function Header() {
-    return (
-        <HeaderContainer>
-            <img src="/arca-colorful-logo.svg"></img>
-            <nav>
-                <ul>
-                    <li><div className="hoverBox">news</div></li>
-                    <li><div className="hoverBox">rankings</div></li>
-                    <li><div className="hoverBox">download</div></li>
-                    <li><div className="hoverBox">faq</div></li>
-                    <li><div className="hoverBox">team</div></li>
-                </ul>
-            </nav>
-            <div className="largeButton">
-                <Button>Login</Button>
-            </div>
-            <div className="mediumButton">
-                <Button fontSize="20px">Login</Button>
-            </div>
-        </HeaderContainer>
-    )
+	return (
+		<HeaderContainer>
+			<img src='/arca-colorful-logo.svg' />
+			<nav>
+				<ul>
+					<li><div className='hoverBox'>news</div></li>
+					<li><div className='hoverBox'>rankings</div></li>
+					<li><div className='hoverBox'>download</div></li>
+					<li><div className='hoverBox'>faq</div></li>
+					<li><div className='hoverBox'>team</div></li>
+				</ul>
+			</nav>
+			<div className='largeButton'>
+				<Button>Login</Button>
+			</div>
+			<div className='mediumButton'>
+				<Button fontSize='20px'>Login</Button>
+			</div>
+		</HeaderContainer>
+	);
 }

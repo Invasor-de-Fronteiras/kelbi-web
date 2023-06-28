@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.footer`
     padding: 5em 15vw;
@@ -42,7 +43,7 @@ const Container = styled.footer`
             margin-top: 2em;
         }
     }
-`
+`;
 
 const Navigation = styled.nav`
     display: flex;
@@ -60,29 +61,29 @@ const Navigation = styled.nav`
             display: none;
         }
     }
-`
+`;
 
 export default function Footer() {
-    return (
-        <Container>
-            <div>
-                <p>O banco pode estar afundando, mas pelo menos a fronteira de Monster Hunter Frontier ainda está em pé e pronta para caçar alguns monstros!</p>
-                <p className="center">~ Kushi</p>
-            </div>
-            <Navigation>
-                <div>
-                    <h2>Navigation</h2>
-                    <ul>
-                        <li>Home</li>
-                        <li>Download</li>
-                        <li>Rankings</li>
-                        <li>News</li>
-                        <li>FAQ</li>
-                        <li>Teams</li>
-                    </ul>
-                </div>
-                <img src="/arca-colorful-logo.svg" width={"72px"}></img>
-            </Navigation>
-        </Container>
-    )
+	return (
+		<Container>
+			<div>
+				<p>O banco pode estar afundando, mas pelo menos a fronteira de Monster Hunter Frontier ainda está em pé e pronta para caçar alguns monstros!</p>
+				<p className='center'>~ Kushi</p>
+			</div>
+			<Navigation>
+				<div>
+					<h2>Navigation</h2>
+					<ul>
+						<li>Home</li>
+						<li>Download</li>
+						<li>Rankings</li>
+						<li>News</li>
+						<li>FAQ</li>
+						<li>Teams</li>
+					</ul>
+				</div>
+				<img src='/arca-colorful-logo.svg' width='72px' />
+			</Navigation>
+		</Container>
+	);
 }

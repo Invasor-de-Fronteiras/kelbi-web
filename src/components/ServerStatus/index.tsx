@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const Container = styled.div`
     display: flex;
@@ -45,7 +46,7 @@ const Container = styled.div`
         }
 
     }
-`
+`;
 
 const Box = styled.div`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -58,41 +59,41 @@ const Box = styled.div`
     @media (max-width: 660px) {
         margin: 0.1em;
     }
-`
+`;
 
 export default function ServerStatus() {
-    const status = [
-        {
-            name: "Total Accounts",
-            qnt: 2908,
-            img: "/globe.svg"
-        },
-        {
-            name: "Total Characters",
-            qnt: 4238,
-            img: "/heart.svg"
-        },
-        {
-            name: "Total Guilds",
-            qnt: 32,
-            img: "/castle.svg"
-        },
-        {
-            name: "Peak Online",
-            qnt: 2908,
-            img: "/peak-online.svg",
-        }
-    ]
+	const status = [
+		{
+			name: 'Total Accounts',
+			qnt: 2908,
+			img: '/globe.svg',
+		},
+		{
+			name: 'Total Characters',
+			qnt: 4238,
+			img: '/heart.svg',
+		},
+		{
+			name: 'Total Guilds',
+			qnt: 32,
+			img: '/castle.svg',
+		},
+		{
+			name: 'Peak Online',
+			qnt: 2908,
+			img: '/peak-online.svg',
+		},
+	];
 
-    return (
-        <Container>
-            {status.map((item) => (
-                <Box key={item.name}>
-                    <img src={item.img} alt={item.name} height={"32px"}/>
-                    <h2>{item.qnt}</h2>
-                    <p>{item.name}</p>
-                </Box>
-            ))}
-        </Container>
-    )
+	return (
+		<Container>
+			{status.map(item => (
+				<Box key={item.name}>
+					<img src={item.img} alt={item.name} height='32px' />
+					<h2>{item.qnt}</h2>
+					<p>{item.name}</p>
+				</Box>
+			))}
+		</Container>
+	);
 }
