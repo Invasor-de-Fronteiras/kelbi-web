@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../Button';
+import Button from '../CustomButton';
 import ServerStatus from '../ServerStatus';
 import GameFeatures from './GameFeatures';
 import EventCards from '../EventCards';
@@ -23,6 +23,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     width: 70vw;
+    max-width: 1400px;
     gap: 3em;
     margin-top: 3em;
 

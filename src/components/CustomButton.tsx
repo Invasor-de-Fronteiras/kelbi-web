@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.button<ButtonProps>`
+const CustomButton = styled.button<ButtonProps>`
     background-color: ${({bgColor}) => bgColor ? bgColor : 'var(--gray-bg)'};
     color: white;
-    padding: 0.5em 3em;
+    padding: ${({padding}) => padding ? padding : '0.5em 3em'};
     border: none;
     border-radius: 10px;
     font-size: ${({fontSize}) => fontSize ? fontSize : '24px'};
@@ -25,6 +25,7 @@ type ButtonProps = {
 	children: string;
 	bgColor?: string;
 	fontSize?: string;
+	padding?: string;
 };
 
-export default Button;
+export default CustomButton;

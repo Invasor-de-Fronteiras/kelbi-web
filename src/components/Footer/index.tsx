@@ -2,12 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.footer`
-    padding: 5em 15vw;
-    background-color: var(--gray-bg);
+	width: 100%;
+	background-color: var(--gray-bg);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`;
+
+const FooterContainer = styled.div`
+    padding: 5em 0;
     color: var(--gray);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+	width: 70vw;
+	max-width: 1400px;
 
     p, li {
         font-size: 12px;
@@ -20,6 +29,7 @@ const Container = styled.footer`
 
     ul {
         list-style-position: inside;
+		padding: 0;
     }
 
     .center {
@@ -66,24 +76,26 @@ const Navigation = styled.nav`
 export default function Footer() {
 	return (
 		<Container>
-			<div>
-				<p>O banco pode estar afundando, mas pelo menos a fronteira de Monster Hunter Frontier ainda está em pé e pronta para caçar alguns monstros!</p>
-				<p className='center'>~ Kushi</p>
-			</div>
-			<Navigation>
+			<FooterContainer>
 				<div>
-					<h2>Navigation</h2>
-					<ul>
-						<li>Home</li>
-						<li>Download</li>
-						<li>Rankings</li>
-						<li>News</li>
-						<li>FAQ</li>
-						<li>Teams</li>
-					</ul>
+					<p>O banco pode estar afundando, mas pelo menos a fronteira de Monster Hunter Frontier ainda está em pé e pronta para caçar alguns monstros!</p>
+					<p className='center'>~ Kushi</p>
 				</div>
-				<img src='/arca-colorful-logo.svg' width='72px' />
-			</Navigation>
+				<Navigation>
+					<div>
+						<h2>Navigation</h2>
+						<ul>
+							<li>Home</li>
+							<li>Download</li>
+							<li>Rankings</li>
+							<li>News</li>
+							<li>FAQ</li>
+							<li>Teams</li>
+						</ul>
+					</div>
+					<img src='/arca-colorful-logo.svg' width='72px' />
+				</Navigation>
+			</FooterContainer>
 		</Container>
 	);
 }
