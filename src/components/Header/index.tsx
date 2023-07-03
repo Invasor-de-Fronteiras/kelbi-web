@@ -117,6 +117,12 @@ const SideBar = styled.div`
 		font-size: 18px;
 	}
 
+	.btn-close-div {
+		position: absolute;
+		top: -15px;
+		right: -25px;
+	}
+
 	li:hover {
 		cursor: pointer;
 		filter: brightness(85%);
@@ -150,6 +156,9 @@ export default function Header() {
 		<HeaderContainer>
 			<GiHamburgerMenu className='hamburger' data-bs-toggle='offcanvas' data-bs-target='#offcanvasWithBothOptions' aria-controls='offcanvasWithBothOptions'/>
 			<SideBar className='offcanvas offcanvas-start sideBar' data-bs-scroll='true' tabIndex={-1} id='offcanvasWithBothOptions' aria-labelledby='offcanvasWithBothOptionsLabel'>
+				<div data-bs-theme='dark' className='btn-close-div'>
+					<button type='button' className='btn-close' data-bs-dismiss='offcanvas' aria-label='Close'></button>
+				</div>
 				<div>
 					<h2>Arca</h2>
 					<img src='/arca-colorful-logo.svg' alt='arca logo'/>
