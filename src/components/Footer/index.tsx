@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Container = styled.footer`
 	width: 100%;
@@ -18,8 +19,9 @@ const FooterContainer = styled.div`
 	width: 70vw;
 	max-width: 1400px;
 
-    p, li {
+    p, li, a {
         font-size: 12px;
+		color: var(--gray);
     }
 
     p {
@@ -31,6 +33,14 @@ const FooterContainer = styled.div`
         list-style-position: inside;
 		padding: 0;
     }
+
+	a:hover {
+		filter: brightness(115%);
+	}
+
+	a:active {
+		filter: brightness(85%);
+	}
 
     .center {
         text-align: center;
@@ -74,6 +84,13 @@ const Navigation = styled.nav`
 `;
 
 export default function Footer() {
+	const scrollToTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
+
 	return (
 		<Container>
 			<FooterContainer>
@@ -85,12 +102,12 @@ export default function Footer() {
 					<div>
 						<h2>Navigation</h2>
 						<ul>
-							<li>Home</li>
-							<li>Download</li>
-							<li>Rankings</li>
-							<li>News</li>
-							<li>FAQ</li>
-							<li>Teams</li>
+							<li><Link to={'/home'} onClick={scrollToTop}>Home</Link></li>
+							<li><Link to={'/download'} onClick={scrollToTop}>Download</Link></li>
+							<li><Link to={'/rankings'} onClick={scrollToTop}>Rankings</Link></li>
+							<li><Link to={'/news'} onClick={scrollToTop}>News</Link></li>
+							<li><Link to={'/faq'} onClick={scrollToTop}>FAQ</Link></li>
+							<li><Link to={'/team'} onClick={scrollToTop}>Team</Link></li>
 						</ul>
 					</div>
 					<img src='/arca-colorful-logo.svg' width='72px' />
