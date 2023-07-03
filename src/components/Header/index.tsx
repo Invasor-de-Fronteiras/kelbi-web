@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import CustomButton from '../CustomButton';
 import {GiHamburgerMenu} from 'react-icons/gi';
+import {Link} from 'react-router-dom';
 
 const HeaderContainer = styled.header`
     padding: 0 3em;
@@ -24,6 +25,10 @@ const HeaderContainer = styled.header`
         height: 100%;
     }
 
+	img {
+		cursor: pointer;
+	}
+
     ul {
         list-style-type: none;
         display: flex;
@@ -35,15 +40,20 @@ const HeaderContainer = styled.header`
         display: flex;
         align-items: center;
     }
+	
+	a {
+		color: #fff;
+	}
 
-    .hoverBox:hover {
+    .hoverBox:hover a {
         cursor: pointer;
         transition: 50ms;
         transform: scale(1.1);
+		color: #e3dede;
     }
 
-    li:active .hoverBox {
-        color: #e3dede;
+    li:active .hoverBox a {
+		color: #fff;
     }
 
     .mediumButton {
@@ -137,18 +147,23 @@ export default function Header() {
 	const navMenu = [
 		{
 			name: 'news',
+			path: '/news',
 		},
 		{
 			name: 'rankings',
+			path: '/rankings',
 		},
 		{
 			name: 'download',
+			path: '/download',
 		},
 		{
 			name: 'faq',
+			path: '/faq',
 		},
 		{
 			name: 'team',
+			path: '/team',
 		},
 	];
 
@@ -159,25 +174,35 @@ export default function Header() {
 				<div data-bs-theme='dark' className='btn-close-div'>
 					<button type='button' className='btn-close' data-bs-dismiss='offcanvas' aria-label='Close'></button>
 				</div>
-				<div>
-					<h2>Arca</h2>
-					<img src='/arca-colorful-logo.svg' alt='arca logo'/>
-				</div>
+				<Link to='/home'>
+					<div data-bs-dismiss='offcanvas'>
+						<h2>Arca</h2>
+						<img src='/arca-colorful-logo.svg' alt='arca logo' />
+					</div>
+				</Link>
 				<hr />
 				<ul className='mobile'>
 					{navMenu.map(item => (
-						<li key={`mobile-${item.name}`} className='mobile'>
-							{item.name}
+						<li key={`mobile-${item.name}`} className='mobile' data-bs-dismiss='offcanvas'>
+							<Link to={item.path}>
+								{item.name}
+							</Link>
 						</li>
 					))}
 				</ul>
 			</SideBar>
-			<img src='/arca-colorful-logo.svg' alt='arca logo' className='desktop'/>
+			<Link to={'/home'}>
+				<img src='/arca-colorful-logo.svg' alt='arca logo' className='desktop'/>
+			</Link>
 			<nav className='desktop'>
 				<ul className='desktop'>
 					{navMenu.map(item => (
 						<li key={`desktop-${item.name}`} className='desktop'>
-							<div className='hoverBox'>{item.name}</div>
+							<div className='hoverBox'>
+								<Link to={item.path}>
+									{item.name}
+								</Link>
+							</div>
 						</li>
 					))}
 				</ul>

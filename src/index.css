@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+}
+
 :root {
     --orange: #F28930;
     --black-bg: #121212;
