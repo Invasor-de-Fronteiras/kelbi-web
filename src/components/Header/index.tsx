@@ -154,10 +154,6 @@ export default function Header() {
 			path: '/rankings',
 		},
 		{
-			name: 'download',
-			path: '/download',
-		},
-		{
 			name: 'faq',
 			path: '/faq',
 		},

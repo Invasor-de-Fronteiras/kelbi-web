@@ -103,7 +103,6 @@ export default function Footer() {
 						<h2>Navigation</h2>
 						<ul>
 							<li><Link to={'/home'} onClick={scrollToTop}>Home</Link></li>
-							<li><Link to={'/download'} onClick={scrollToTop}>Download</Link></li>
 							<li><Link to={'/rankings'} onClick={scrollToTop}>Rankings</Link></li>
 							<li><Link to={'/news'} onClick={scrollToTop}>News</Link></li>
 							<li><Link to={'/faq'} onClick={scrollToTop}>FAQ</Link></li>
