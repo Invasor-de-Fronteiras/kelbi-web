@@ -50,6 +50,7 @@ const Card = styled.div`
 		display: flex;
 		justify-content: center;
 		gap: 0.5em;
+		margin-top: 0.3em;
 
 		span {
 			color: var(--orange);

@@ -4,10 +4,42 @@ import ServerStatus from '../components/ServerStatus';
 import GameFeatures from '../components/GameFeatures';
 import EventCards from '../components/EventCards';
 import {Link} from 'react-router-dom';
+import {styled} from 'styled-components';
+
+const Container = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5em;
+	width: 100%;
+
+    .introText {
+		width: 60%;
+        text-align: justify;
+    }
+
+    @media (max-width: 1280px) {
+        .introText {
+            width: 80%;
+        }
+    }
+
+    @media (max-width: 760px) {
+        .introText {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .introText {
+            font-size: 16px
+        }
+    }
+`;
 
 export default function Home() {
 	return (
-		<>
+		<Container>
 			<img src='/arca-colorful-logo.svg' alt='arca logo' width='72px' />
 			<p className='introText'>
                     Esteja entre os poucos jogadores que tiveram a chance de jogar<span> Monster Hunter Frontier</span> e agora junte-se a nós em nosso servidor. Aqui você encontrará uma comunidade unida e disposta a enfrentar qualquer desafio que o jogo possa oferecer
@@ -19,6 +51,6 @@ export default function Home() {
 			<ServerStatus />
 			<GameFeatures />
 			<EventCards />
-		</>
+		</Container>
 	);
 }

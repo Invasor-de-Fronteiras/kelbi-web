@@ -9,6 +9,7 @@ const Container = styled.div`
 
 	h2 {
 		font-size: 1.5em;
+		margin-bottom: 0.3em;
 	}
 
 	p {
@@ -113,7 +114,7 @@ export default function Team() {
 		<Container>
 			<div>
 				<h2>Quem somos</h2>
-				<p>Somos um grupo brasileiro de Monster Hunter Frontier apaixonado pelo jogo e dedicado a oferecer uma experiência única aos jogadores. Nosso servidor é hospedado na AWS em São Paulo, garantindo uma conexão estável e de qualidade. Com um IP dedicado ***, nosso servidor está online 24 horas por dia, 7 dias por semana, para que você possa desfrutar do jogo sempre que quiser. Além disso, temos uma série de eventos semanais para manter a comunidade engajada e entretida!</p>
+				<p>Somos um grupo brasileiro de Monster Hunter Frontier apaixonado pelo jogo e dedicado a oferecer uma experiência única aos jogadores. Nosso servidor é hospedado na AWS em São Paulo, garantindo uma conexão estável e de qualidade. Com um IP dedicado 54.207.29.25, nosso servidor está online 24 horas por dia, 7 dias por semana, para que você possa desfrutar do jogo sempre que quiser. Além disso, temos uma série de eventos semanais para manter a comunidade engajada e entretida!</p>
 			</div>
 			<div>
 				<h2>O nosso servidor</h2>
