@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import RankingCard from '../components/RankingCard';
-import {BsFillPersonFill} from 'react-icons/bs';
-import {HiUserGroup} from 'react-icons/hi';
 import {type TopPlayers, apiEndpoints} from '../apiConfig';
 import Pagination from '../components/Pagination';
+import RankSelector from '../components/RankSelector';
 
 const Container = styled.div`
 	display: flex;
@@ -67,18 +66,16 @@ export default function Rankings() {
 			});
 	}, [rankType, rankPage]);
 
+	const handleReturnToFirstPage = () => {
+		setRankPage(1);
+	};
+
 	return (
 		<Container>
-			<h2>Classificação - Road</h2>
-			<form className='options'>
-				<div className='btn-group' role='group' aria-label='Basic radio toggle button group'>
-					<input type='radio' className='btn-check' name='btnradio' id='btnradio1' autoComplete='off' checked />
-					<label className='rank-toogle btn' htmlFor='btnradio1'>Group <HiUserGroup /></label>
-
-					<input type='radio' className='btn-check' name='btnradio' id='btnradio2' autoComplete='off' />
-					<label className='rank-toogle btn ' htmlFor='btnradio2'>Solo <BsFillPersonFill /></label>
-				</div>
-			</form>
+			<RankSelector
+				setRankType={setRankType}
+				returnToFirstPage={handleReturnToFirstPage}
+			/>
 			<CardContainer>
 				{topPlayers?.data.map((item, index) => (
 					<>
@@ -86,9 +83,10 @@ export default function Rankings() {
 							key={item.name}
 							name={item.name}
 							img={'./question-mark.svg'}
-							floors={item.max_stages_mp}
-							points={item.max_points_mp}
+							floors={item.max_stages_mp ?? item.max_stages_sp}
+							points={item.max_points_mp ?? item.max_points_sp}
 							rank={(index + 1) + ((rankPage - 1) * rowsPerPage)}
+							rankType = {rankType}
 						/>
 						{index !== topPlayers.data.length - 1 && <hr />}
 					</>

@@ -12,7 +12,7 @@ const Container = styled.div`
 	border-radius: 15px;
 
 	h2 {
-		font-size: 32px;
+		font-size: 28px;
 		font-weight: 600;
 	}
 
@@ -93,6 +93,7 @@ type Props = {
 	img: string;
 	floors: number;
 	points: number;
+	rankType: string;
 };
 
 export default function RankingCard(props: Props) {
@@ -107,11 +108,19 @@ export default function RankingCard(props: Props) {
 					<h2 className={'truncated-text'}>{props.name}</h2>
 				</div>
 			</div>
-			<div className='floor-container'>
-				<p>Andar</p>
-				<h2>{props.floors}</h2>
-				<p>{props.points}pts</p>
-			</div>
+			{props.rankType.toLocaleLowerCase().includes('floors') ? (
+				<div className='floor-container'>
+					<p>Andar</p>
+					<h2>{props.floors}</h2>
+					<p>{props.points}pts</p>
+				</div>
+			) : (
+				<div className='floor-container'>
+					<p>Pontos</p>
+					<h2>{props.points}</h2>
+					<p>Floor {props.floors}</p>
+				</div>
+			)}
 		</Container>
 	);
 }
