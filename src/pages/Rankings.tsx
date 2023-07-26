@@ -4,7 +4,7 @@ import RankingCard from '../components/RankingCard';
 import {BsFillPersonFill} from 'react-icons/bs';
 import {HiUserGroup} from 'react-icons/hi';
 import {type TopPlayers, apiEndpoints} from '../apiConfig';
-import CustomButton from '../components/CustomButton';
+import Pagination from '../components/Pagination';
 
 const Container = styled.div`
 	display: flex;
@@ -45,12 +45,6 @@ const CardContainer = styled.section`
 	}
 `;
 
-const PaginationContainer = styled.div`
-	display: flex;
-	gap: 0.3em;
-	margin-bottom: 2em;
-`;
-
 export default function Rankings() {
 	const [topPlayers, setTopPlayers] = useState<TopPlayers>();
 	const [rankPage, setRankPage] = useState<number>(1);
@@ -64,26 +58,14 @@ export default function Rankings() {
 			return data;
 		};
 
-		fetchData().then(data => {
-			setTopPlayers(data);
-		}).catch(error => {
-			console.log('Fail to get server data: ', error);
-		});
+		fetchData()
+			.then(data => {
+				setTopPlayers(data);
+			})
+			.catch(error => {
+				console.log('Fail to get server data: ', error);
+			});
 	}, [rankType, rankPage]);
-
-	const handlePageChange = (pageNumber: number) => {
-		setRankPage(pageNumber);
-	};
-
-	const generatePageNumbers = () => {
-		if (!topPlayers) {
-			return [];
-		}
-
-		const totalPlayers = topPlayers.total;
-		const totalPages = Math.ceil(totalPlayers / rowsPerPage);
-		return Array.from({length: totalPages}, (_, index) => index + 1);
-	};
 
 	return (
 		<Container>
@@ -101,7 +83,7 @@ export default function Rankings() {
 				{topPlayers?.data.map((item, index) => (
 					<>
 						<RankingCard
-							key={`${item.name}-card`}
+							key={item.name}
 							name={item.name}
 							img={'./question-mark.svg'}
 							floors={item.max_stages_mp}
@@ -112,23 +94,12 @@ export default function Rankings() {
 					</>
 				))}
 			</CardContainer>
-			<PaginationContainer>
-				{generatePageNumbers().map(pageNumber => (
-					<CustomButton
-						key={pageNumber}
-						width='40px'
-						height='40px'
-						fontSize={'16px'}
-						padding={'0'}
-						onClick={() => {
-							handlePageChange(pageNumber);
-						}}
-						disabled={rankPage === pageNumber}
-					>
-						{`${pageNumber}`}
-					</CustomButton>
-				))}
-			</PaginationContainer>
+			<Pagination
+				rowsPerPage={rowsPerPage}
+				totalItems={topPlayers?.total ?? 0}
+				actualPage={rankPage}
+				onPageChange={setRankPage}
+			/>
 		</Container>
 	);
 }
