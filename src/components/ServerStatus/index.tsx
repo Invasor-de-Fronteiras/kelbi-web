@@ -1,5 +1,14 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import {apiEndpoints} from '../../apiConfig';
+
+type ServerInfo = {
+	totalAccounts: number;
+	totalCharacters: number;
+	totalGuilds: number;
+	peakOnline: number;
+};
 
 const Container = styled.div`
     display: flex;
@@ -62,25 +71,41 @@ const Box = styled.div`
 `;
 
 export default function ServerStatus() {
+	const [serverData, setServerData] = useState<ServerInfo>();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await fetch(apiEndpoints.serverStatus);
+			const data = await response.json() as ServerInfo;
+			return data;
+		};
+
+		fetchData().then(data => {
+			setServerData(data);
+		}).catch(error => {
+			console.log('Fail to get server data: ', error);
+		});
+	}, []);
+
 	const status = [
 		{
 			name: 'Total Accounts',
-			qnt: 2908,
+			qnt: serverData?.totalAccounts,
 			img: '/globe.svg',
 		},
 		{
 			name: 'Total Characters',
-			qnt: 4238,
+			qnt: serverData?.totalCharacters,
 			img: '/heart.svg',
 		},
 		{
 			name: 'Total Guilds',
-			qnt: 32,
+			qnt: serverData?.totalGuilds,
 			img: '/castle.svg',
 		},
 		{
 			name: 'Peak Online',
-			qnt: 2908,
+			qnt: serverData?.peakOnline,
 			img: '/peak-online.svg',
 		},
 	];

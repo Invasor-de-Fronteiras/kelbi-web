@@ -3,15 +3,13 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	display: flex;
-	background-color: var(--gray-bg);
 	padding: 1em;
-	border-radius: 15px;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
 	max-width: 800px;
 	height: 85px;
-	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	border-radius: 15px;
 
 	h2 {
 		font-size: 32px;

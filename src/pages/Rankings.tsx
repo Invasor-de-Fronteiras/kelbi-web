@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import RankingCard from '../components/RankingCard';
 import {BsFillPersonFill} from 'react-icons/bs';
 import {HiUserGroup} from 'react-icons/hi';
+import {type TopPlayers, apiEndpoints} from '../apiConfig';
 
 const Container = styled.div`
 	display: flex;
@@ -33,32 +34,34 @@ const CardContainer = styled.section`
 	flex-direction: column;
 	gap: 1em;
 	align-items: center;
+	background-color: var(--gray-bg);
+	border-radius: 15px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+	padding: 1em 0;
+	margin-bottom: 2em;
+
+	hr {
+		width: 95%;
+	}
 `;
 
 export default function Rankings() {
-	const roadExample = [
-		{
-			rank: 1,
-			name: '01234567890123456789',
-			img: './team/kushi.svg',
-			floors: 452,
-			points: 250773,
-		},
-		{
-			rank: 10,
-			name: 'Francisco',
-			img: './team/kushi.svg',
-			floors: 45,
-			points: 50773,
-		},
-		{
-			rank: 1000,
-			name: 'Joaquim',
-			img: './team/kushi.svg',
-			floors: 8,
-			points: 230,
-		},
-	];
+	const [topPlayers, setTopPlayers] = useState<TopPlayers>();
+	const [rankType, setRankType] = useState<string>('groupFloors');
+
+	useEffect(() => {
+		const fetchData = async (): Promise<TopPlayers> => {
+			const response = await fetch(apiEndpoints[rankType]);
+			const data = await response.json() as TopPlayers;
+			return data;
+		};
+
+		fetchData().then(data => {
+			setTopPlayers(data);
+		}).catch(error => {
+			console.log('Fail to get server data: ', error);
+		});
+	}, [rankType]);
 
 	return (
 		<Container>
@@ -73,15 +76,18 @@ export default function Rankings() {
 				</div>
 			</form>
 			<CardContainer>
-				{roadExample.map(item => (
-					<RankingCard
-						key={`${item.name}-card`}
-						name={item.name}
-						img={item.img}
-						floors={item.floors}
-						points={item.points}
-						rank={item.rank}
-					/>
+				{topPlayers?.data.map((item, index) => (
+					<>
+						<RankingCard
+							key={`${item.name}-card`}
+							name={item.name}
+							img={'./team/kushi.svg'}
+							floors={item.max_stages_mp}
+							points={item.max_points_mp}
+							rank={1}
+						/>
+						{index !== topPlayers.data.length - 1 && <hr />}
+					</>
 				))}
 			</CardContainer>
 		</Container>
