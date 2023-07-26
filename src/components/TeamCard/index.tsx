@@ -28,6 +28,10 @@ const Card = styled.div`
 		color: var(--gray);
 	}
 
+	hr {
+		margin-top: 0.5em;
+	}
+
 	.name-container {
 		display: flex;
 		justify-content: baseline;

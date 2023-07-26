@@ -28,7 +28,7 @@ const Container = styled.div`
     gap: 3em;
     margin-top: 3em;
 
-    h1, h2, h3, h4, h5, h6, p, img {
+    h1, h2, h3, h4, h5, h6, p, img, hr {
         margin: 0;
         padding: 0;
     }

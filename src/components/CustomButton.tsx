@@ -10,6 +10,8 @@ const CustomButton = styled.button<ButtonProps>`
     font-size: ${({fontSize}) => fontSize ? fontSize : '24px'};
     font-weight: 600;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    height: ${({height}) => height};
+    width: ${({width}) => width};
     cursor: pointer;
     
     &:hover {
@@ -19,6 +21,11 @@ const CustomButton = styled.button<ButtonProps>`
     &:active {
         filter: brightness(85%);
     }
+
+	&:disabled {
+		cursor: default;
+		filter: brightness(60%);
+	}
 `;
 
 type ButtonProps = {
@@ -26,6 +33,8 @@ type ButtonProps = {
 	bgColor?: string;
 	fontSize?: string;
 	padding?: string;
+	width?: string;
+	height?: string;
 };
 
 export default CustomButton;

@@ -4,6 +4,7 @@ import RankingCard from '../components/RankingCard';
 import {BsFillPersonFill} from 'react-icons/bs';
 import {HiUserGroup} from 'react-icons/hi';
 import {type TopPlayers, apiEndpoints} from '../apiConfig';
+import CustomButton from '../components/CustomButton';
 
 const Container = styled.div`
 	display: flex;
@@ -38,20 +39,27 @@ const CardContainer = styled.section`
 	border-radius: 15px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 	padding: 1em 0;
-	margin-bottom: 2em;
 
 	hr {
 		width: 95%;
 	}
 `;
 
+const PaginationContainer = styled.div`
+	display: flex;
+	gap: 0.3em;
+	margin-bottom: 2em;
+`;
+
 export default function Rankings() {
 	const [topPlayers, setTopPlayers] = useState<TopPlayers>();
+	const [rankPage, setRankPage] = useState<number>(1);
 	const [rankType, setRankType] = useState<string>('groupFloors');
+	const rowsPerPage = 10;
 
 	useEffect(() => {
 		const fetchData = async (): Promise<TopPlayers> => {
-			const response = await fetch(apiEndpoints[rankType]);
+			const response = await fetch(`${apiEndpoints[rankType]}?rows=${rowsPerPage}&page=${rankPage}`);
 			const data = await response.json() as TopPlayers;
 			return data;
 		};
@@ -61,7 +69,21 @@ export default function Rankings() {
 		}).catch(error => {
 			console.log('Fail to get server data: ', error);
 		});
-	}, [rankType]);
+	}, [rankType, rankPage]);
+
+	const handlePageChange = (pageNumber: number) => {
+		setRankPage(pageNumber);
+	};
+
+	const generatePageNumbers = () => {
+		if (!topPlayers) {
+			return [];
+		}
+
+		const totalPlayers = topPlayers.total;
+		const totalPages = Math.ceil(totalPlayers / rowsPerPage);
+		return Array.from({length: totalPages}, (_, index) => index + 1);
+	};
 
 	return (
 		<Container>
@@ -81,15 +103,32 @@ export default function Rankings() {
 						<RankingCard
 							key={`${item.name}-card`}
 							name={item.name}
-							img={'./team/kushi.svg'}
+							img={'./question-mark.svg'}
 							floors={item.max_stages_mp}
 							points={item.max_points_mp}
-							rank={1}
+							rank={(index + 1) + ((rankPage - 1) * rowsPerPage)}
 						/>
 						{index !== topPlayers.data.length - 1 && <hr />}
 					</>
 				))}
 			</CardContainer>
+			<PaginationContainer>
+				{generatePageNumbers().map(pageNumber => (
+					<CustomButton
+						key={pageNumber}
+						width='40px'
+						height='40px'
+						fontSize={'16px'}
+						padding={'0'}
+						onClick={() => {
+							handlePageChange(pageNumber);
+						}}
+						disabled={rankPage === pageNumber}
+					>
+						{`${pageNumber}`}
+					</CustomButton>
+				))}
+			</PaginationContainer>
 		</Container>
 	);
 }

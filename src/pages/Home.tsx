@@ -5,6 +5,7 @@ import GameFeatures from '../components/GameFeatures';
 import EventCards from '../components/EventCards';
 import {Link} from 'react-router-dom';
 import {styled} from 'styled-components';
+import CustomButton from '../components/CustomButton';
 
 const Container = styled.div`
 	display: flex;
@@ -46,7 +47,7 @@ export default function Home() {
 			</p>
 			<p className='introText'>Para o guia de instalação entre em nosso Discord pelo botão abaixo:</p>
 			<Link to={'https://discord.com/channels/967058504403808356/967058504881930280'} target='_blank'>
-				<Button bgColor='var(--orange)'>Guia de Instalação</Button>
+				<CustomButton bgColor='var(--orange)' padding='0.3em 1.5em'>Guia de Instalação</CustomButton>
 			</Link>
 			<ServerStatus />
 			<GameFeatures />
