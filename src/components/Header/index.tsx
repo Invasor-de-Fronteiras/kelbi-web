@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CustomButton from '../CustomButton';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {Link} from 'react-router-dom';
+import Login from '../Login';
 
 const HeaderContainer = styled.header`
     padding: 0 3em;
@@ -144,6 +145,8 @@ const SideBar = styled.div`
 `;
 
 export default function Header() {
+	const [loginIsOpen, setLoginIsOpen] = useState<boolean>(false);
+
 	const navMenu = [
 		{
 			name: 'news',
@@ -163,8 +166,13 @@ export default function Header() {
 		},
 	];
 
+	const handleLogin = () => {
+		setLoginIsOpen(!loginIsOpen);
+	};
+
 	return (
 		<HeaderContainer>
+			{loginIsOpen && <Login handleClose={handleLogin} />}
 			<GiHamburgerMenu className='hamburger' data-bs-toggle='offcanvas' data-bs-target='#offcanvasWithBothOptions' aria-controls='offcanvasWithBothOptions'/>
 			<SideBar className='offcanvas offcanvas-start sideBar' data-bs-scroll='true' tabIndex={-1} id='offcanvasWithBothOptions' aria-labelledby='offcanvasWithBothOptionsLabel'>
 				<div data-bs-theme='dark' className='btn-close-div'>
@@ -204,13 +212,28 @@ export default function Header() {
 				</ul>
 			</nav>
 			<div className='largeButton desktop'>
-				<CustomButton>Login</CustomButton>
+				<CustomButton
+					onClick={handleLogin}
+				>
+					Login
+				</CustomButton>
 			</div>
 			<div className='mediumButton desktop'>
-				<CustomButton fontSize='20px'>Login</CustomButton>
+				<CustomButton
+					onClick={handleLogin}
+					fontSize='20px'
+				>
+					Login
+				</CustomButton>
 			</div>
 			<div className='smallButton'>
-				<CustomButton fontSize='20px' padding='0.3em 1.5em'>Login</CustomButton>
+				<CustomButton
+					onClick={handleLogin}
+					fontSize='20px'
+					padding='0.3em 1.5em'
+				>
+					Login
+				</CustomButton>
 			</div>
 		</HeaderContainer>
 	);

@@ -27,6 +27,11 @@ const Container = styled.div`
 	.active {
 		text-decoration: underline;
 	}
+	
+	.active:hover {
+		cursor: default;
+		filter: brightness(100%);
+	}
 
 	@media (max-width: 680px) {
 		font-size: 0.8em

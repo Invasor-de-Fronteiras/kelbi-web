@@ -12,6 +12,8 @@ const CustomButton = styled.button<ButtonProps>`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     height: ${({height}) => height};
     width: ${({width}) => width};
+    min-width: ${({minWidth}) => minWidth};
+	min-height: ${({minHeight}) => minHeight};
     cursor: pointer;
     
     &:hover {
@@ -35,6 +37,8 @@ type ButtonProps = {
 	padding?: string;
 	width?: string;
 	height?: string;
+	minWidth?: string;
+	minHeight?: string;
 };
 
 export default CustomButton;

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../components/CustomButton';
 import ServerStatus from '../components/ServerStatus';
 import GameFeatures from '../components/GameFeatures';
 import EventCards from '../components/EventCards';

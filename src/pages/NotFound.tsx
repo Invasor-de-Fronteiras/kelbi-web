@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import styled from 'styled-components';
 import CustomButton from '../components/CustomButton';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const Container = styled.div`
 	display: flex;
@@ -28,7 +28,7 @@ export default function NotFound() {
 		<Container>
 			<img src='./error404.svg' alt='error404'/>
 			<Link to={'home'} style={{alignSelf: 'center'}}>
-				<CustomButton bgColor={'var(--orange)' }>Menu Principal</CustomButton>
+				<CustomButton bgColor={'var(--orange)' }>Home</CustomButton>
 			</Link>
 		</Container>
 	);
