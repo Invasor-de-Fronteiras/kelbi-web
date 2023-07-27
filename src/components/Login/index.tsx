@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import {Modal, Button, Form, FloatingLabel} from 'react-bootstrap';
+import {Modal, Form, FloatingLabel} from 'react-bootstrap';
 import CustomButton from '../CustomButton';
+import {type LoginIngame, apiEndpoints} from '../../apiConfig';
+import {saveToken} from './tokenStorage';
 
 type Props = {
 	handleClose: () => void;
+};
+
+type Credentials = {
+	username: string;
+	password: string;
 };
 
 const Container = styled.div`
@@ -13,8 +20,53 @@ const Container = styled.div`
 	padding: 1em 2em;
 `;
 
+const ErrorMessage = styled.p`
+	color: red;
+	text-align: end;
+`;
+
+const ErrorMessageContainer = styled.div`
+	height: 2em;
+`;
+
 export default function Login(props: Props) {
+	const [credentials, setCredentials] = useState<Credentials>({username: '', password: ''});
+	const [loginFail, setLoginFail] = useState<boolean>(false);
 	const {handleClose} = props;
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const {name, value} = e.target;
+		setCredentials(prevCredentials => ({
+			...prevCredentials,
+			[name]: value,
+		}));
+	};
+
+	const handleSubmit = async () => {
+		const response = await fetch(`${apiEndpoints.login}/?login=${credentials.username}&password=${credentials.password}`);
+		const data = await response.json() as LoginIngame;
+
+		switch (response.status) {
+			case 200:
+				console.log('Logado: ', data);
+				saveToken(data.token);
+				handleClose();
+				break;
+			case 401:
+				setLoginFail(true);
+				break;
+			case 501:
+				setLoginFail(true);
+				console.error('Error: Unexpected result, login failed');
+				break;
+			default:
+				console.log('Error: Unexpected result');
+		}
+	};
+
+	useEffect(() => {
+		setLoginFail(false);
+	}, [credentials]);
 
 	return (
 		<Modal show={true} onHide={handleClose} centered>
@@ -25,19 +77,34 @@ export default function Login(props: Props) {
 				<Modal.Body>
 					<FloatingLabel
 						controlId='floatingInput'
-						label='Email address'
+						label='Game Login'
 						className='mb-3'
 					>
-						<Form.Control type='email' placeholder='name@example.com'/>
+						<Form.Control
+							type='text'
+							name='username'
+							value={credentials.username}
+							onChange={handleChange}
+							placeholder='User'
+						/>
 					</FloatingLabel>
 					<FloatingLabel controlId='floatingPassword' label='Password'>
-						<Form.Control type='password' placeholder='Password'/>
+						<Form.Control
+							type='password'
+							name='password'
+							value={credentials.password}
+							onChange={handleChange}
+							placeholder='Password'
+						/>
 					</FloatingLabel>
+					<ErrorMessageContainer>
+						{loginFail && <ErrorMessage>Wrong user or login</ErrorMessage>}
+					</ErrorMessageContainer>
 					<CustomButton
 						bgColor='var(--orange)'
 						width='100%'
-						onClick={handleClose}
-						className='mt-5'
+						onClick={handleSubmit}
+						className='mt-2'
 					>
 						Login
 					</CustomButton>

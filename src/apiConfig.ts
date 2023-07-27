@@ -8,6 +8,7 @@ export const apiEndpoints: ApiEndpoints = {
 	groupFloors: `${apiBaseUrl}/road/groupf`,
 	soloPoints: `${apiBaseUrl}/road/solop`,
 	groupPoints: `${apiBaseUrl}/road/groupp`,
+	login: `${apiBaseUrl}/login/ingame`,
 };
 
 export type PlayerData = {
@@ -22,4 +23,12 @@ export type TopPlayers = {
 	total: number;
 	page: number;
 	data: PlayerData[];
+};
+
+export type LoginIngame = {
+	id: number;
+	username: string;
+	password: string;
+	token: string;
+	error: string;
 };
