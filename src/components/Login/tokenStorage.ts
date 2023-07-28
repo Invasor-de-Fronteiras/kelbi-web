@@ -6,6 +6,8 @@ export const saveToken = (token: string) => {
 
 export const loadToken = () => localStorage.getItem(tokenKey);
 
+export const checkTokenExistence = () => Boolean(loadToken());
+
 export const removeToken = () => {
 	localStorage.removeItem(tokenKey);
 };

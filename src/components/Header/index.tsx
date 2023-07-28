@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
-import CustomButton from '../CustomButton';
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {Link} from 'react-router-dom';
 import Login from '../Login';
+import {AuthContext} from '../../contexts/AuthContext';
+import LoginButton from './LoginButton';
+import LoggedNav from './LoggedNav';
 
 const HeaderContainer = styled.header`
     padding: 0 3em;
@@ -146,6 +148,7 @@ const SideBar = styled.div`
 
 export default function Header() {
 	const [loginIsOpen, setLoginIsOpen] = useState<boolean>(false);
+	const authContext = useContext(AuthContext);
 
 	const navMenu = [
 		{
@@ -168,6 +171,14 @@ export default function Header() {
 
 	const handleLogin = () => {
 		setLoginIsOpen(!loginIsOpen);
+	};
+
+	const renderLoginButton = () => {
+		if (authContext.isLoggedIn) {
+			return <LoggedNav />;
+		}
+
+		return <LoginButton handleLogin={handleLogin}/>;
 	};
 
 	return (
@@ -211,30 +222,7 @@ export default function Header() {
 					))}
 				</ul>
 			</nav>
-			<div className='largeButton desktop'>
-				<CustomButton
-					onClick={handleLogin}
-				>
-					Login
-				</CustomButton>
-			</div>
-			<div className='mediumButton desktop'>
-				<CustomButton
-					onClick={handleLogin}
-					fontSize='20px'
-				>
-					Login
-				</CustomButton>
-			</div>
-			<div className='smallButton'>
-				<CustomButton
-					onClick={handleLogin}
-					fontSize='20px'
-					padding='0.3em 1.5em'
-				>
-					Login
-				</CustomButton>
-			</div>
+			{renderLoginButton()}
 		</HeaderContainer>
 	);
 }

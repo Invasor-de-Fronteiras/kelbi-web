@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import styled from 'styled-components';
 import {Modal, Form, FloatingLabel} from 'react-bootstrap';
 import CustomButton from '../CustomButton';
 import {type LoginIngame, apiEndpoints} from '../../apiConfig';
 import {saveToken} from './tokenStorage';
+import {AuthContext} from '../../contexts/AuthContext';
 
 type Props = {
 	handleClose: () => void;
@@ -33,6 +34,7 @@ export default function Login(props: Props) {
 	const [credentials, setCredentials] = useState<Credentials>({username: '', password: ''});
 	const [loginFail, setLoginFail] = useState<boolean>(false);
 	const {handleClose} = props;
+	const authContext = useContext(AuthContext);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const {name, value} = e.target;
@@ -51,6 +53,7 @@ export default function Login(props: Props) {
 				console.log('Logado: ', data);
 				saveToken(data.token);
 				handleClose();
+				authContext.setIsLoggedIn(true);
 				break;
 			case 401:
 				setLoginFail(true);
