@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {Nav, NavDropdown, Navbar} from 'react-bootstrap';
-import {removeToken} from '../../Login/tokenStorage';
+import {loadToken, removeToken} from '../../Login/tokenStorage';
 import {AuthContext} from '../../../contexts/AuthContext';
 import {TbLogout} from 'react-icons/tb';
+import {type GetUserData, apiEndpoints} from '../../../apiConfig';
 
 const Container = styled.div`
 	display: flex;
@@ -24,6 +25,8 @@ const LogoutContainer = styled.div`
 `;
 
 export default function LoggedNav() {
+	const [username, setUsername] = useState<string>('');
+
 	const navOptions = [
 		{
 			option: 'Account Info',
@@ -42,11 +45,27 @@ export default function LoggedNav() {
 		img: 'team/kushi.svg',
 	};
 
+	useEffect(() => {
+		const fetchData = async (): Promise<GetUserData> => {
+			const response = await fetch(`${apiEndpoints.getUserData}?token=${loadToken() ?? ''}`);
+			const data = await response.json() as GetUserData;
+			return data;
+		};
+
+		fetchData()
+			.then(data => {
+				setUsername(data.username);
+			})
+			.catch(error => {
+				console.log('Fail to get username: ', error);
+			});
+	}, []);
+
 	return (
 		<Container>
 			<UserImg
 				src={testDisplay.img}
-				alt={testDisplay.username}
+				alt={username}
 			/>
 			<Navbar variant='dark' expand='lg'>
 				<Container>
@@ -54,7 +73,7 @@ export default function LoggedNav() {
 					<Navbar.Collapse>
 						<Nav>
 							<NavDropdown
-								title={testDisplay.username}
+								title={username}
 								menuVariant='dark'
 							>
 								{navOptions.map(item => (

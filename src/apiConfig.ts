@@ -9,6 +9,7 @@ export const apiEndpoints: ApiEndpoints = {
 	soloPoints: `${apiBaseUrl}/road/solop`,
 	groupPoints: `${apiBaseUrl}/road/groupp`,
 	login: `${apiBaseUrl}/login/ingame`,
+	getUserData: `${apiBaseUrl}/login/userdata`,
 };
 
 export type PlayerData = {
@@ -31,4 +32,11 @@ export type LoginIngame = {
 	password: string;
 	token: string;
 	error: string;
+};
+
+export type GetUserData = {
+	id: number;
+	username: string;
+	dev: boolean;
+	provider_id: string;
 };
