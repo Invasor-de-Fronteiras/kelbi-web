@@ -13,11 +13,13 @@ export const apiEndpoints: ApiEndpoints = {
 };
 
 export type PlayerData = {
+	user_id: string;
 	name: string;
-	max_stages_sp?: number;
-	max_points_sp?: number;
+	max_stages_sp: number;
+	max_points_sp: number;
 	max_stages_mp: number;
 	max_points_mp: number;
+	provider_id?: string;
 };
 
 export type TopPlayers = {
