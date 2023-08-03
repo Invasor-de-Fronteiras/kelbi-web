@@ -5,6 +5,7 @@ import CustomButton from '../CustomButton';
 import {type LoginIngame, apiEndpoints} from '../../apiConfig';
 import {saveToken} from './tokenStorage';
 import {AuthContext} from '../../contexts/AuthContext';
+import axios, {type AxiosError} from 'axios';
 
 type Props = {
 	handleClose: () => void;
@@ -32,7 +33,7 @@ const ErrorMessageContainer = styled.div`
 
 export default function Login(props: Props) {
 	const [credentials, setCredentials] = useState<Credentials>({username: '', password: ''});
-	const [loginFail, setLoginFail] = useState<boolean>(false);
+	const [errorMessage, setErrorMessage] = useState<string>('');
 	const {handleClose} = props;
 	const authContext = useContext(AuthContext);
 
@@ -42,34 +43,35 @@ export default function Login(props: Props) {
 			...prevCredentials,
 			[name]: value,
 		}));
+		setErrorMessage('');
 	};
 
 	const handleSubmit = async () => {
-		const response = await fetch(`${apiEndpoints.login}/?login=${credentials.username}&password=${credentials.password}`);
-		const data = await response.json() as LoginIngame;
-
-		switch (response.status) {
-			case 200:
-				console.log('Logado: ', data);
-				saveToken(data.token);
-				handleClose();
-				authContext.setIsLoggedIn(true);
-				break;
-			case 401:
-				setLoginFail(true);
-				break;
-			case 501:
-				setLoginFail(true);
-				console.error('Error: Unexpected result, login failed');
-				break;
-			default:
-				console.log('Error: Unexpected result');
+		try {
+			const response = await axios.get(`${apiEndpoints.login}/?login=${credentials.username}&password=${credentials.password}`);
+			const data = await response.data as LoginIngame;
+			saveToken(data.token);
+			handleClose();
+			authContext.setIsLoggedIn(true);
+		} catch (error) {
+			const err = error as AxiosError;
+			console.log('err response: ', err.response);
+			if (err.isAxiosError) {
+				const errStatus = err.response?.status;
+				switch (errStatus) {
+					case 401:
+						setErrorMessage('Wrong user or login');
+						break;
+					case 501:
+						setErrorMessage('Error 501: Unexpected error');
+						break;
+					default:
+						setErrorMessage('Unexpected error');
+						console.log('Error: Unexpected result');
+				}
+			}
 		}
 	};
-
-	useEffect(() => {
-		setLoginFail(false);
-	}, [credentials]);
 
 	return (
 		<Modal show={true} onHide={handleClose} centered>
@@ -101,7 +103,7 @@ export default function Login(props: Props) {
 						/>
 					</FloatingLabel>
 					<ErrorMessageContainer>
-						{loginFail && <ErrorMessage>Wrong user or login</ErrorMessage>}
+						{errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 					</ErrorMessageContainer>
 					<CustomButton
 						bgColor='var(--orange)'

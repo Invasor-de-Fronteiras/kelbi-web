@@ -5,6 +5,7 @@ import {loadToken, removeToken} from '../../Login/tokenStorage';
 import {AuthContext} from '../../../contexts/AuthContext';
 import {TbLogout} from 'react-icons/tb';
 import {type GetUserData, apiEndpoints} from '../../../apiConfig';
+import axios from 'axios';
 
 const Container = styled.div`
 	display: flex;
@@ -46,13 +47,13 @@ export default function LoggedNav() {
 	};
 
 	useEffect(() => {
-		const fetchData = async (): Promise<GetUserData> => {
-			const response = await fetch(`${apiEndpoints.getUserData}?token=${loadToken() ?? ''}`);
-			const data = await response.json() as GetUserData;
+		const loginWithGameCredentials = async (): Promise<GetUserData> => {
+			const response = await axios.get(`${apiEndpoints.getUserData}?token=${loadToken() ?? ''}`);
+			const data = await response.data as GetUserData;
 			return data;
 		};
 
-		fetchData()
+		loginWithGameCredentials()
 			.then(data => {
 				setUsername(data.username);
 			})

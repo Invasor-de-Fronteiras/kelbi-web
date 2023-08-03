@@ -2,6 +2,7 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {apiEndpoints} from '../../apiConfig';
+import axios from 'axios';
 
 type ServerInfo = {
 	totalAccounts: number;
@@ -74,13 +75,13 @@ export default function ServerStatus() {
 	const [serverData, setServerData] = useState<ServerInfo>();
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch(apiEndpoints.serverStatus);
-			const data = await response.json() as ServerInfo;
+		const fetchServerData = async () => {
+			const response = await axios.get(apiEndpoints.serverStatus);
+			const data = response.data as ServerInfo;
 			return data;
 		};
 
-		fetchData().then(data => {
+		fetchServerData().then(data => {
 			setServerData(data);
 		}).catch(error => {
 			console.log('Fail to get server data: ', error);

@@ -4,6 +4,7 @@ import RankingCard from '../components/RankingCard';
 import {type TopPlayers, apiEndpoints} from '../apiConfig';
 import Pagination from '../components/Pagination';
 import RankSelector from '../components/RankSelector';
+import axios from 'axios';
 
 const Container = styled.div`
 	display: flex;
@@ -51,13 +52,13 @@ export default function Rankings() {
 	const rowsPerPage = 10;
 
 	useEffect(() => {
-		const fetchData = async (): Promise<TopPlayers> => {
-			const response = await fetch(`${apiEndpoints[rankType]}?rows=${rowsPerPage}&page=${rankPage}`);
-			const data = await response.json() as TopPlayers;
+		const fetchTopPlayersData = async (): Promise<TopPlayers> => {
+			const response = await axios.get(`${apiEndpoints[rankType]}?rows=${rowsPerPage}&page=${rankPage}`);
+			const data = await response.data as TopPlayers;
 			return data;
 		};
 
-		fetchData()
+		fetchTopPlayersData()
 			.then(data => {
 				setTopPlayers(data);
 			})
