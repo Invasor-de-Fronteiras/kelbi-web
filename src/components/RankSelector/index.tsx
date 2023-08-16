@@ -49,19 +49,19 @@ export default function RankSelector(props: Props) {
 	const rankOptions: RankOption[] = [
 		{
 			name: 'Group Floors',
-			type: 'groupFloors',
+			type: 'groupf',
 		},
 		{
 			name: 'Solo Floors',
-			type: 'soloFloors',
+			type: 'solof',
 		},
 		{
 			name: 'Group Points',
-			type: 'groupPoints',
+			type: 'groupp',
 		},
 		{
 			name: 'Solo Points',
-			type: 'soloPoints',
+			type: 'solop',
 		},
 	];
 

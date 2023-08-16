@@ -48,13 +48,14 @@ const CardContainer = styled.section`
 export default function Rankings() {
 	const [topPlayers, setTopPlayers] = useState<TopPlayers>();
 	const [rankPage, setRankPage] = useState<number>(1);
-	const [rankType, setRankType] = useState<string>('groupFloors');
+	const [rankType, setRankType] = useState<string>('groupf');
 	const rowsPerPage = 10;
 
 	useEffect(() => {
 		const fetchTopPlayersData = async (): Promise<TopPlayers> => {
-			const response = await axios.get(`${apiEndpoints[rankType]}?rows=${rowsPerPage}&page=${rankPage}`);
+			const response = await axios.get(`${apiEndpoints.road}?rows=${rowsPerPage}&page=${rankPage}&type=${rankType}`);
 			const data = await response.data as TopPlayers;
+			console.log('Data: ', data);
 			return data;
 		};
 
@@ -83,9 +84,9 @@ export default function Rankings() {
 						<RankingCard
 							key={item.name}
 							name={item.name}
-							img={'./question-mark.svg'}
-							floors={item.max_stages_mp ?? item.max_stages_sp}
-							points={item.max_points_mp ?? item.max_points_sp}
+							img={item.avatarUrl ? item.avatarUrl : './question-mark.svg'}
+							floors={item.max_stages}
+							points={item.max_points}
 							rank={(index + 1) + ((rankPage - 1) * rowsPerPage)}
 							rankType = {rankType}
 						/>

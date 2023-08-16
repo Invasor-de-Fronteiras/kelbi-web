@@ -4,10 +4,7 @@ export type ApiEndpoints = Record<string, string>;
 
 export const apiEndpoints: ApiEndpoints = {
 	serverStatus: `${apiBaseUrl}/users/count`,
-	soloFloors: `${apiBaseUrl}/road/solof`,
-	groupFloors: `${apiBaseUrl}/road/groupf`,
-	soloPoints: `${apiBaseUrl}/road/solop`,
-	groupPoints: `${apiBaseUrl}/road/groupp`,
+	road: `${apiBaseUrl}/road/rank`,
 	login: `${apiBaseUrl}/login/ingame`,
 	getUserData: `${apiBaseUrl}/login/userdata`,
 };
@@ -15,11 +12,10 @@ export const apiEndpoints: ApiEndpoints = {
 export type PlayerData = {
 	user_id: string;
 	name: string;
-	max_stages_sp: number;
-	max_points_sp: number;
-	max_stages_mp: number;
-	max_points_mp: number;
-	provider_id?: string;
+	max_stages: number;
+	max_points: number;
+	provider_id: string | undefined;
+	avatarUrl: string;
 };
 
 export type TopPlayers = {
@@ -36,9 +32,25 @@ export type LoginIngame = {
 	error: string;
 };
 
+export type DiscordInfo = {
+	id: string;
+	username: string;
+	avatar: string;
+	discriminator: string;
+	public_flags: number;
+	flags: number;
+	banner: number | undefined;
+	accent_color: number;
+	global_name: string;
+	avatar_decoration: string | undefined;
+	banner_color: string;
+	avatarUrl: string | undefined;
+};
+
 export type GetUserData = {
 	id: number;
 	username: string;
 	dev: boolean;
 	provider_id: string;
+	discordInfo: DiscordInfo;
 };
