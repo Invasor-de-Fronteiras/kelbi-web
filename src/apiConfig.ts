@@ -7,6 +7,7 @@ export const apiEndpoints: ApiEndpoints = {
 	road: `${apiBaseUrl}/road/rank`,
 	login: `${apiBaseUrl}/login/ingame`,
 	getUserData: `${apiBaseUrl}/login/userdata`,
+	discordInfo: `${apiBaseUrl}/discord/info`,
 };
 
 export type PlayerData = {
@@ -52,5 +53,4 @@ export type GetUserData = {
 	username: string;
 	dev: boolean;
 	provider_id: string;
-	discordInfo: DiscordInfo;
 };

@@ -43,7 +43,7 @@ const Container = styled.div`
 `;
 
 export default function RankSelector(props: Props) {
-	const [selectedOption, setSelectedOption] = useState('groupFloors');
+	const [selectedOption, setSelectedOption] = useState('groupf');
 	const {setRankType, returnToFirstPage} = props;
 
 	const rankOptions: RankOption[] = [

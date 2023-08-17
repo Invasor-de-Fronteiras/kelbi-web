@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import DiscordImg from './DiscordImg';
 
 const Container = styled.div`
 	display: flex;
@@ -39,6 +40,7 @@ const Container = styled.div`
 	}
 
 	.user-container-rank {
+		font-family: var(--mono-font);
 		width: 20%;
 		min-width: 5em;
 	}
@@ -56,6 +58,10 @@ const Container = styled.div`
 		width: 20%;
 		max-width: 3em;
 		align-items: end;
+
+		h2 {
+			font-family: var(--mono-font);
+		}
 	}
 
 	@media (max-width: 550px) {
@@ -90,10 +96,10 @@ const Container = styled.div`
 type Props = {
 	rank: number;
 	name: string;
-	img: string;
 	floors: number;
 	points: number;
 	rankType: string;
+	discordId: string | undefined;
 };
 
 export default function RankingCard(props: Props) {
@@ -104,7 +110,10 @@ export default function RankingCard(props: Props) {
 					<h2>{`#${props.rank}`}</h2>
 				</div>
 				<div className='user-container-name'>
-					<img src={props.img} alt={props.name}/>
+					<DiscordImg
+						discordId={props.discordId}
+						alt={props.name}
+					/>
 					<h2 className={'truncated-text'}>{props.name}</h2>
 				</div>
 			</div>
