@@ -8,7 +8,7 @@ type ServerInfo = {
 	totalAccounts: number;
 	totalCharacters: number;
 	totalGuilds: number;
-	peakOnline: number;
+	onlineNow: number;
 };
 
 const Container = styled.div`
@@ -105,9 +105,9 @@ export default function ServerStatus() {
 			img: '/castle.svg',
 		},
 		{
-			name: 'Peak Online',
-			qnt: serverData?.peakOnline,
-			img: '/peak-online.svg',
+			name: 'Online Now',
+			qnt: serverData?.onlineNow,
+			img: '/online-now.svg',
 		},
 	];
 
